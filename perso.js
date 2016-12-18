@@ -5,11 +5,12 @@ function Perso () {
 	this.scaling = 0;
 	this.direction = 0;
 	this.rotation = 0;
-	this.speed = 0;
+	this.forwardSpeed = 0;
+	this.sideSpeed = 0;
 	this.isHit = false;
 	this.render = function () {
 		translate(this.pos.x, this.pos.y);
-		rotate(radians(this.direction) + PI / 2);
+		rotate(this.direction + PI / 2);
 		triangle(-this.scale, this.scale, this.scale, this.scale,
 			0, -this.scale);
 		// rect(this.pos.x - this.scale / 2, this.pos.y - this.scale / 2,
@@ -24,17 +25,21 @@ function Perso () {
 		this.scale += this.scaling;
 	}
 	this.rotate = function () {
-		this.direction += this.rotation;
+		this.direction = atan2(mouseY - this.pos.y, mouseX - this.pos.x);
 	}
-	this.setRotation = function (angle) {
-		this.rotation = angle;
+	this.moveForward = function () {
+		this.pos.x += cos(this.direction) * this.forwardSpeed;
+		this.pos.y += sin(this.direction) * this.forwardSpeed;
 	}
-	this.move = function () {
-		this.pos.x += cos(radians(this.direction)) * this.speed;
-		this.pos.y += sin(radians(this.direction)) * this.speed;
+	this.moveSideways = function () {
+		this.pos.x += cos(this.direction + PI / 2) * this.sideSpeed;
+		this.pos.y += sin(this.direction + PI / 2) * this.sideSpeed;
 	}
-	this.setSpeed = function (speed) {
-		this.speed = speed;
+	this.setForwardSpeed = function (speed) {
+		this.forwardSpeed = speed;
+	}
+	this.setSideSpeed = function (speed) {
+		this.sideSpeed = speed;
 	}
 	this.edges = function () {
 		if (this.pos.y > windowHeight)
