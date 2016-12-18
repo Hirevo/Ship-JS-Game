@@ -6,8 +6,8 @@ function Laser (pos, angle) {
 		point(this.pos.x, this.pos.y);
 	}
 	this.update = function () {
-		this.pos.x += cos(radians(this.angle)) * 20;
-		this.pos.y += sin(radians(this.angle)) * 20;
+		this.pos.x += cos(this.angle) * 20;
+		this.pos.y += sin(this.angle) * 20;
 	}
 	this.hits = function (target) {
 		var d = dist(target.pos.x, target.pos.y, this.pos.x, this.pos.y);

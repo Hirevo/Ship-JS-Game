@@ -46,7 +46,8 @@ function draw() {
 	// perso.setScaling(random(-5, 5));
 	perso.rescale();
   	perso.rotate();
-  	perso.move();
+  	perso.moveForward();
+  	perso.moveSideways();
   	perso.edges();
 	
 	if (perso.isHit) {
@@ -62,21 +63,26 @@ function draw() {
 		perso.setScaling(-1);
 	else
 		perso.setScaling(0);
-	if (keyIsDown(68))
-		perso.setRotation(3);
-	else if (keyIsDown(81))
-		perso.setRotation(-3);
-	else
-		perso.setRotation(0);
 	if (keyIsDown(90))
-		perso.setSpeed(5);
+		perso.setForwardSpeed(5);
 	else if (keyIsDown(83))
-		perso.setSpeed(-5);
+		perso.setForwardSpeed(-5);
 	else
-		perso.setSpeed(0);
+		perso.setForwardSpeed(0);
+	if (keyIsDown(68))
+	 	perso.setSideSpeed(5);
+	else if (keyIsDown(81))
+	 	perso.setSideSpeed(-5);
+	 else
+	 	perso.setSideSpeed(0);
 }
 
 function keyPressed() {
 	if (key == ' ')
+		lasers.push(new Laser(perso.pos, perso.direction));
+}
+
+function mousePressed() {
+	if (mouseButton == LEFT)
 		lasers.push(new Laser(perso.pos, perso.direction));
 }
