@@ -83,6 +83,8 @@ function keyPressed() {
 }
 
 function mousePressed() {
-	if (mouseButton == LEFT)
+	if (mouseButton == 0)
+  		perso.rotate();
+	if (mouseButton == 0 || mouseButton == "left")
 		lasers.push(new Laser(perso.pos, perso.direction));
 }
